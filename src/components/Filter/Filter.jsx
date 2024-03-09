@@ -1,10 +1,26 @@
+import { nanoid } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFilter } from 'store/selectors';
+import { changeFilter } from 'store/filterSlice';
 import { FilterWrap, FilterInput } from './Filter.styled';
 
-export const Filter = ({ value, onChange }) => {
+const filterGenerateId = nanoid();
+
+export function Filter() {
+  const value = useSelector(getFilter);
+  const dispatch = useDispatch();
+
+  const onChange = e => {
+    const normalizedValue = e.target.value.toLowerCase();
+
+    dispatch(changeFilter(normalizedValue));
+  };
+
   return (
     <FilterWrap>
       <label htmlFor="filter">Find contacts by name:</label>
       <FilterInput
+        id={filterGenerateId}
         type="text"
         name="filter"
         placeholder="Search contacts"
@@ -13,4 +29,4 @@ export const Filter = ({ value, onChange }) => {
       />
     </FilterWrap>
   );
-};
+}
