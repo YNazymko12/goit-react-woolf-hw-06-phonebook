@@ -12,6 +12,7 @@ body {
   background-size: cover;
   overflow: hidden;
   color: #10403b;
+  overflow: auto;
 }
 
 code {
